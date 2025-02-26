@@ -31,6 +31,7 @@ const XLSX = require('xlsx');
     
 
   let scrapedData = [];
+  let companyCount = 0;
 
   // Wait for the navigation list to load
   await page.waitForSelector('.pagination li');
@@ -77,7 +78,7 @@ const XLSX = require('xlsx');
           await page.evaluate(button => {
             button.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }, loadMoreButton);
-          await page.evaluate(() => new Promise(resolve => setTimeout(resolve, 2000)));
+          await page.evaluate(() => new Promise(resolve => setTimeout(resolve, 3000)));
           console.log('Clicking "Load More" button...');
           try {
             await loadMoreButton.click();
@@ -87,7 +88,7 @@ const XLSX = require('xlsx');
           
 
           // Wait for AJAX content to load
-          await page.evaluate(() => new Promise(resolve => setTimeout(resolve, 7000)));
+          await page.evaluate(() => new Promise(resolve => setTimeout(resolve, 8000)));
 
           continue;
         } else {
@@ -166,8 +167,8 @@ const XLSX = require('xlsx');
 
       // Wait before continuing to the next iteration
       await page.evaluate(() => new Promise(resolve => setTimeout(resolve, 2000)));
-
-      console.log(`Finished scraping company ${companyDetails.name}`);
+      companyCount++;
+      console.log(`Finished scraping company ${companyCount}:  ${companyDetails.name}`);
     }
   }
 
