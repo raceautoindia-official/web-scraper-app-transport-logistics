@@ -39,7 +39,7 @@ const XLSX = require('xlsx');
   // so we re-query them in each iteration.
   const navElements = await page.$$('.pagination li');
 
-  for (let i = 0; i < navElements.length-27; i++) {
+  for (let i = 0; i < navElements.length-1; i++) {
     // Re-fetch the navigation list items on each iteration because the DOM might be refreshed.
     const navItems = await page.$$('.pagination li');
     const navItem = navItems[i];
